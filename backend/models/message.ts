@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
-export interface IPost extends Document {
+export interface IMessageDocument extends Document {
   title: String
   like: Number
   creator: String
@@ -9,7 +9,7 @@ export interface IPost extends Document {
   selectedFile: String
 }
 
-const articleSchema: Schema<IPost> = new mongoose.Schema({
+const articleSchema: Schema<IMessageDocument> = new mongoose.Schema({
     title: {
       type: String,
       required: true
@@ -42,6 +42,6 @@ const articleSchema: Schema<IPost> = new mongoose.Schema({
     }
 )
 
-const Post = mongoose.model<IPost>('Post', articleSchema)
+const Message = mongoose.model<IMessageDocument>('Message', articleSchema)
 
-export default Post
+export default Message
