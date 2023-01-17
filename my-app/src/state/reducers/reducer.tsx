@@ -6,7 +6,10 @@ const initialState = [{}]
 export const reducer = (state: Object[] = initialState, action: Action): Object[] => {
     switch(action.type){
         case ActionType.GET_ALL:
+            return action.payload
+        default:
             return state
-    }
+        }
+
 }
 
