@@ -1,15 +1,13 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
 
-const initialState = [{}]
-
-export const reducer = (state: Object[] = initialState, action: Action): Object[] => {
+export const reducer = (state: Array<any> = [], action: Action) => {
     switch(action.type){
         case ActionType.GET_ALL:
             return action.payload
+        case ActionType.CREATE:
+            return [...state,action.payload]
         default:
             return state
         }
-
 }
-
