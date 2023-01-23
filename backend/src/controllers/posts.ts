@@ -1,11 +1,11 @@
-import express from 'express';
+import express,{Request, Response} from 'express';
 import mongoose from 'mongoose';
 
 import PostMessage from '../models/postMessage';
 
 const router = express.Router();
 
-export const getPosts = async (req, res) => { 
+export const getPosts = async (req:Request, res:Response) => { 
     try {
         const postMessages = await PostMessage.find();
         res.status(200).json(postMessages);
@@ -14,7 +14,7 @@ export const getPosts = async (req, res) => {
     }
 }
 
-export const getPost = async (req, res) => { 
+export const getPost = async (req:Request, res:Response) => { 
     const { id } = req.params;
 
     try {
@@ -26,7 +26,7 @@ export const getPost = async (req, res) => {
     }
 }
 
-export const createPost = async (req, res) => {
+export const createPost = async (req:Request, res:Response) => { 
     const { title, message, selectedFile, creator, tags } = req.body;
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
     try {
@@ -39,7 +39,7 @@ export const createPost = async (req, res) => {
     }
 }
 
-export const updatePost = async (req, res) => {
+export const updatePost = async (req:Request, res:Response) => { 
     const { id } = req.params;
     const { title, message, creator, selectedFile, tags } = req.body;
     
@@ -52,7 +52,7 @@ export const updatePost = async (req, res) => {
     res.json(updatedPost);
 }
 
-export const deletePost = async (req, res) => {
+export const deletePost = async (req:Request, res:Response) => { 
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
@@ -62,7 +62,7 @@ export const deletePost = async (req, res) => {
     res.json({ message: "Post deleted successfully." });
 }
 
-export const likePost = async (req, res) => {
+export const likePost = async (req:Request, res:Response) => { 
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
