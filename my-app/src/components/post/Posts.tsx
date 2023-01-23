@@ -17,7 +17,7 @@ const Posts = () => {
   return (
       <div className="flex flex-wrap justify-evenly">
         {
-          posts.map((post: postProps, index:number) => <Post key={index} creater={post.creater} tags={post.tags} title={post.title} message={post.message} like={post.like}></Post>)
+          posts.map((post: postProps, index:number) => <Post key={index} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeCount={post.likeCount}></Post>)
         }
       </div>
     )

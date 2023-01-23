@@ -1,8 +1,7 @@
 import { Dispatch } from "react"
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
-import { fetchPosts,createPosts } from "../../api/api"
-import { AxiosHeaders } from "axios"
+import { fetchPosts, createPosts, createUsers, logInUsers } from "../../api/api"
 
 export const getAll = () => {
     return async(dispatch: Dispatch<Action>) => {
@@ -17,9 +16,28 @@ export const getAll = () => {
 export const create = (newPost: object) => {
     return async(dispatch: Dispatch<Action>) => {
         const {data} = await createPosts(newPost)
-        console.log('create', data)
         dispatch({
             type: ActionType.CREATE,
+            payload: data
+        })
+    }
+}
+
+export const createUser = (newUser: object) => {
+    return async(dispatch: Dispatch<Action>) => {
+        const {data} = await createUsers(newUser)
+        dispatch({
+            type: ActionType.CREATE_USER,
+            payload: data
+        })
+    }
+}
+
+export const logInUser = (user: object) => {
+    return async(dispatch: Dispatch<Action>) => {
+        const {data} = await logInUsers(user)
+        dispatch({
+            type: ActionType.LOGIN_USER,
             payload: data
         })
     }

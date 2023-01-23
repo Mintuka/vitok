@@ -7,6 +7,10 @@ export const reducer = (state: Array<any> = [], action: Action) => {
             return action.payload
         case ActionType.CREATE:
             return [...state,action.payload]
+        case ActionType.CREATE_USER:
+            return [action.payload]
+        case ActionType.LOGIN_USER:
+            return [action.payload]
         default:
             return state
         }

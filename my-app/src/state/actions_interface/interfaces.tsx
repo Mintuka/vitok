@@ -10,4 +10,14 @@ interface Create{
     payload: Array<any>
 }
 
-export type Action = GetAll | Create
+interface CreateUser{
+    type: ActionType.CREATE_USER,
+    payload: Array<any>
+}
+
+interface LogInUser{
+    type: ActionType.LOGIN_USER
+    payload: Array<any>
+}
+
+export type Action = GetAll | Create | CreateUser | LogInUser

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actions } from "../../state";
-import { RootState } from "../../state/reducers";
 
 
 const Form = () => {
 
-    const [post, setPost] = useState({title:'',message:'',tags: [''],selectedFile:'yo',creater:'jo'})
-    const state = useSelector((state: RootState) => state.post)
+    const [post, setPost] = useState({title:'',message:'',tags: [''],selectedFile:'image',creator:'Billionaire Minte'})
     const dispatch = useDispatch();
     const { create } = bindActionCreators(actions, dispatch)
     const handleSubmit = (e: { preventDefault: () => void; }) => {

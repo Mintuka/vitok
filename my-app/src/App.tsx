@@ -1,13 +1,26 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/footer/footer";
 import Form from "./components/form/NewPost";
+import NavBar from "./components/navbar/NavBar";
+import NoPage from "./components/NoPage/NoPage";
 import Posts from "./components/post/Posts";
+import SignIn from "./components/user/SignIn";
+import SignUp from "./components/user/SignUp";
 
 const App = () => {
 
   return (
-      <div>
-        <Posts></Posts>
-        <Form></Form>
-      </div>
+    <BrowserRouter>
+      <NavBar/>
+      <Routes>
+          <Route path="/" element={<Posts />} />
+          <Route path="form" element={<Form />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="*" element={<NoPage />} />
+      </Routes>
+      <Footer/>
+    </BrowserRouter>
     )
 };
 
