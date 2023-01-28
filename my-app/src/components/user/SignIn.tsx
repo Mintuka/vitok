@@ -7,7 +7,7 @@ import { RootState } from "../../state/reducers";
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const state = useSelector((state: RootState) => state.post)
+    const state = useSelector((state: RootState) => state.user)
     const dispatch = useDispatch();
     const { logInUser } = bindActionCreators(actions, dispatch)
     const handleSubmit = (e: { preventDefault: () => void; }) => {
@@ -31,7 +31,7 @@ const SignIn = () => {
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                         Password
                     </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" onChange={(e) => setPassword(e.target.value)}/>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>            
                 
                 <div className="flex items-center justify-between">

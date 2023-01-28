@@ -7,7 +7,7 @@ import { RootState } from "../../state/reducers/index"
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const state = useSelector((state: RootState) => state.post)
+  const state = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch();
   const { createUser } = bindActionCreators(actions, dispatch)
   const handleSubmit = (e: { preventDefault: () => void; }) => {
