@@ -1,7 +1,7 @@
 import { Dispatch } from "react"
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
-import { fetchPosts, createPosts, createUsers, logInUsers } from "../../api/api"
+import { fetchPosts, createPosts, createUsers, logInUsers, deletePost, updatePost } from "../../api/api"
 
 export const getAll = () => {
     return async(dispatch: Dispatch<Action>) => {
@@ -18,6 +18,27 @@ export const create = (newPost: object) => {
         const {data} = await createPosts(newPost)
         dispatch({
             type: ActionType.CREATE,
+            payload: data
+        })
+    }
+}
+
+export const update = (_id: String) => {
+    return async(dispatch: Dispatch<Action>) => {
+        const data = await updatePost(_id)
+        dispatch({
+            type: ActionType.UPDATE,
+            payload: [data]
+        })
+    }
+}
+
+export const deletePosts = (postId: String) => {
+    return async(dispatch: Dispatch<Action>) => {
+        await deletePost(postId)
+        const {data} = await fetchPosts()
+        dispatch({
+            type: ActionType.GET_ALL,
             payload: data
         })
     }
