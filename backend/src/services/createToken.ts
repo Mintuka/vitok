@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
-const secret = 'secret'
+export const secret = 'secret'
+const expiresIn = 30*24*60*60
 
 export const createToken = (_id: any) => {
-    return jwt.sign({_id}, secret, {expiresIn: 30*24*60*60})
+    return jwt.sign({_id}, secret, {expiresIn})
 }
