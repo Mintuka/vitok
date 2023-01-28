@@ -10,6 +10,11 @@ interface Create{
     payload: Array<any>
 }
 
+interface Update{
+    type: ActionType.UPDATE,
+    payload: Array<any>
+}
+
 interface CreateUser{
     type: ActionType.CREATE_USER,
     payload: Array<any>
@@ -20,4 +25,4 @@ interface LogInUser{
     payload: Array<any>
 }
 
-export type Action = GetAll | Create | CreateUser | LogInUser
+export type Action = GetAll | Create | CreateUser | LogInUser | Update
