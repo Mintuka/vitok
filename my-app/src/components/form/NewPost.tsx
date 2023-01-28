@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actions } from "../../state";
+import { RootState } from "../../state/reducers";
 
 
 const Form = () => {
 
     const [post, setPost] = useState({title:'',message:'',tags: [''],selectedFile:'image',creator:'Billionaire Minte'})
+    // const user: any = useSelector((state: RootState) => state.user)
+    
     const dispatch = useDispatch();
     const { create } = bindActionCreators(actions, dispatch)
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
         create(post)
     }
-
     return (
             <div className="w-full max-w-xs">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
