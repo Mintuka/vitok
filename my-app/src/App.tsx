@@ -9,16 +9,15 @@ import SignIn from "./components/user/SignIn";
 import SignUp from "./components/user/SignUp";
 
 const App = () => {
-
   return (
     <BrowserRouter>
       <NavBar/>
       <Routes>
           <Route path="/" element={<Posts />} />
-          <Route path="form" element={<Form />} />
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="update" element={<UpdatePost />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/update/:id" element={<UpdatePost />} />
           <Route path="*" element={<NoPage />} />
       </Routes>
       <Footer/>

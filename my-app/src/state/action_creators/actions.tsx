@@ -23,9 +23,9 @@ export const create = (newPost: object) => {
     }
 }
 
-export const update = (_id: String) => {
+export const update = (_id: String, post: Object) => {
     return async(dispatch: Dispatch<Action>) => {
-        const data = await updatePost(_id)
+        const {data} = await updatePost(_id, post)
         dispatch({
             type: ActionType.UPDATE,
             payload: [data]
@@ -35,12 +35,11 @@ export const update = (_id: String) => {
 
 export const deletePosts = (postId: String) => {
     return async(dispatch: Dispatch<Action>) => {
-        await deletePost(postId)
-        const {data} = await fetchPosts()
-        dispatch({
-            type: ActionType.GET_ALL,
-            payload: data
-        })
+        let data: any = await deletePost(postId)
+        console.log('data -> ',data)
+        if (data.message){
+            data = data.message
+        }
     }
 }
 

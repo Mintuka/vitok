@@ -15,10 +15,11 @@ const Posts = () => {
     getAll()
   },[])
   console.log(posts)
+  
   return (
       <div className="flex flex-wrap justify-evenly">
         {
-          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeCount={post.likeCount}></Post>)
+          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeCount={post.likeCount} selectedFile={post.selectedFile}></Post>)
         }
       </div>
     )

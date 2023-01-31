@@ -13,7 +13,15 @@ const authAxios = axios.create({
 })
 export const fetchPosts = () => axios.get(url+'/posts')
 export const createPosts = (newPost: Object) => authAxios.post(url+'/posts', newPost)
-export const updatePost = (_id: String) => authAxios.put<Action>(url+`/posts/${_id}`)
+export const updatePost = (_id: String, update: Object) => authAxios.put<Action>(url+`/posts/${_id}`, update)
+                            // .catch(error => {
+                            //     console.log('error',error.message, 'fix')
+                            //     return error.message
+                            // })
 export const deletePost = (_id: String) => authAxios.delete(url+`/posts/${_id}`)
+                            .catch(error => {
+                                console.log('error',error,'delete')
+                                return {message: error.response.data}
+                            })
 export const createUsers = (newUser: Object) => axios.post(url+'/users', newUser)
 export const logInUsers = (user: Object) => axios.post(url+'/users/login', user)

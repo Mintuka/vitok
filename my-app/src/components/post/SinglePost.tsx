@@ -6,7 +6,7 @@ import { actions } from "../../state"
 import {BiDotsVertical} from 'react-icons/bi'
 import {AiOutlineLike} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-export interface postProps {_id: String,creator:String, tags:String[], title:String, message:String,likeCount:String}
+export interface postProps {_id: String,creator:String, tags:String[], title:String, selectedFile:String, message:String,likeCount:String}
 
 interface Props{
   like: React.ElementType
@@ -27,8 +27,8 @@ const Post = ({_id, creator, tags, title, message,likeCount}:postProps) => {
             <div className="relative border" >
               <BiDotsVertical className={BiDotsClass} size={20} onClick={() => handleBiDot(setChange,setBiDotsClas)}/>
               <div className={change}>
-                <Link to={'/update'} className='text-green-300 bg-slate-300 m-1'>update</Link>
-                <div onClick={() => deletePosts(_id)} className='text-red-400 bg-slate-300 m-1'>delete</div>
+                <Link to={`/update/${_id}`} className='text-green-300 border'>update</Link>
+                <div onClick={() => deletePosts(_id)} className='text-red-400 border'>delete</div>
               </div>
               <h4 className='p-2'>{creator}</h4>
               <h6 className='p-2'>2 hours ago</h6>
