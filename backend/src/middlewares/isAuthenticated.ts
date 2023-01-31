@@ -15,7 +15,7 @@ export const isAuthenticated = async(req:Request, res:Response, next:NextFunctio
     const token = authorization.split(' ')[1]
     try{
         const {_id} = jwt.verify(token, secret) as JwtPayload
-        req.body.user = await User.findOne({_id}).select('_id')
+        req.body.userId = await User.findOne({_id}).select('_id')
         next()
         return
     }catch(err){
