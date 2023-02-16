@@ -6,7 +6,8 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/user'
-
+import likeRoutes from './routes/like'
+import commentRoutes from './routes/comment'
 const app = express();
 
 app.use(bodyParser.json({ limit: '30mb' }))
@@ -15,7 +16,8 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use('/users', userRoutes)
-
+app.use('/like', likeRoutes)
+app.use('/comments', commentRoutes)
 const CONNECTION_URL = 'mongodb://localhost:27017/react';
 const PORT = process.env.PORT|| 5000;
 

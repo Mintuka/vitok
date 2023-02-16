@@ -10,6 +10,16 @@ interface Create{
     payload: Array<any>
 }
 
+interface CreateComment{
+    type: ActionType.CREATE_COMMENT,
+    payload: Array<any>
+}
+
+interface GetComment{
+    type: ActionType.GET_COMMENT,
+    payload: Array<any>
+}
+
 interface Update{
     type: ActionType.UPDATE,
     payload: Array<any>
@@ -25,4 +35,4 @@ interface LogInUser{
     payload: Array<any>
 }
 
-export type Action = GetAll | Create | CreateUser | LogInUser | Update
+export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment

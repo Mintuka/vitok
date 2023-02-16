@@ -16,7 +16,9 @@ export const isAuthenticated = async(req:Request, res:Response, next:NextFunctio
     try{
         const {_id} = jwt.verify(token, secret) as JwtPayload
         req.body.userId = await User.findOne({_id}).select('_id')
-        next()
+        if (req.body.userId){
+            next()
+        }
         return
     }catch(err){
         res.status(400).json({error: err})

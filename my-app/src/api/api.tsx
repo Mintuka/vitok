@@ -13,15 +13,22 @@ const authAxios = axios.create({
 })
 export const fetchPosts = () => axios.get(url+'/posts')
 export const createPosts = (newPost: Object) => authAxios.post(url+'/posts', newPost)
-export const updatePost = (_id: String, update: Object) => authAxios.put<Action>(url+`/posts/${_id}`, update)
-                            // .catch(error => {
-                            //     console.log('error',error.message, 'fix')
-                            //     return error.message
-                            // })
+export const updatePost = (id: String, update: Object) => authAxios.put<Action>(url+`/posts/${id}`, update)
+                            .catch(error => {
+                                return {updateMessage: error.response.data}
+                            })
+
 export const deletePost = (_id: String) => authAxios.delete(url+`/posts/${_id}`)
                             .catch(error => {
-                                console.log('error',error,'delete')
-                                return {message: error.response.data}
+                                return {deleteMessage: error.response.data}
                             })
+export const likePost = (postId: String) => authAxios.get(url+`/like/${postId}`)
+                            .catch(error => {
+                                return {likeMessage: error}
+                            })
+
+export const getComments = () => axios.get(url+'/comments')
+export const createComment = (newComment: Object) => authAxios.post(url+'/comments', newComment)
+
 export const createUsers = (newUser: Object) => axios.post(url+'/users', newUser)
 export const logInUsers = (user: Object) => axios.post(url+'/users/login', user)

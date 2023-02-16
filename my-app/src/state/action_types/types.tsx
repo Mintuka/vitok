@@ -2,6 +2,8 @@ export enum ActionType {
     GET_ALL = "GET_ALL",
     CREATE  = "CREATE",
     UPDATE = "UPDATE",
+    CREATE_COMMENT = "CREATE_COMMENT",
+    GET_COMMENT = "GET_COMMENT",
     CREATE_USER = "CREATE_USER",
     LOGIN_USER = "LOGIN_USER"
 }

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getPosts, getPost, createPost, updatePost, likePost, deletePost } from '../controllers/posts.js';
+import { getPosts, getPost, createPost, updatePost, deletePost } from '../controllers/posts.js';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
 import { isAuthorized } from '../middlewares/isAuthorized.js';
 

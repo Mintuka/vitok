@@ -1,7 +1,10 @@
 import mongoose,{Schema} from 'mongoose';
 
 const commentSchema = new mongoose.Schema({
-    comment: String,
+    comment: {
+        type: String,
+        required: true
+    },
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'
