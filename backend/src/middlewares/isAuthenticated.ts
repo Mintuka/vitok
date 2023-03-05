@@ -13,10 +13,14 @@ export const isAuthenticated = async(req:Request, res:Response, next:NextFunctio
         return res.status(401).json({error: 'Authorization tokend required'})
     }
     const token = authorization.split(' ')[1]
+    console.log('tn',token)
     try{
+        console.log('hello')
         const {_id} = jwt.verify(token, secret) as JwtPayload
-        req.body.userId = await User.findOne({_id}).select('_id')
-        if (req.body.userId){
+        console.log('id',_id)
+        req.body.user = await User.findOne({_id})
+        console.log(req.body.user)
+        if (req.body.user){
             next()
         }
         return

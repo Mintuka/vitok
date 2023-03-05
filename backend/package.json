@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon"
+    "dev": "npx nodemon",
+    "start": "node dist/server.js",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",

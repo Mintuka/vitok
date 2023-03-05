@@ -2,9 +2,12 @@ import axios from "axios"
 import { Action } from "../state/actions_interface/interfaces"
 
 const url = 'http://localhost:5000'
-const user: any = JSON.parse(localStorage.getItem('user') || '')   
-console.log(user) 
-const token = user[0].token
+var token = ''
+if (localStorage.getItem('user')){
+    const user: any = JSON.parse(localStorage.getItem('user') || '')   
+    token = user.token
+} 
+
 const authAxios = axios.create({
     baseURL: url,
     headers: {

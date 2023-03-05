@@ -6,7 +6,7 @@ export const userReducer = (state: Array<any> = [], action: Action) => {
         case ActionType.CREATE_USER:
             return [action.payload]
         case ActionType.LOGIN_USER:
-            return [action.payload]
+            return action.payload
         default:
             return state
         }

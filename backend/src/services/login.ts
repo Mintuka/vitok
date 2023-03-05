@@ -5,9 +5,10 @@ import { createToken } from './createToken'
 
 export const login = async(req: Request, res: Response) => {
     const {email, password} = req.body
-    console.log(email, 'loginE')
+    if (!email || !password){
+      return res.status(400).json({message: 'Email and Password are required'})
+    }
     const user: IUser = await User.findOne({email})
-    console.log(password, user.password,'login')
     if (user){
         const auth = bcrypt.compare(password, user.password);
         if (!auth) {

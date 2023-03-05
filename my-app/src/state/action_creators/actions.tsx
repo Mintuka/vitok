@@ -16,6 +16,7 @@ export const getAll = () => {
 export const create = (newPost: object) => {
     return async(dispatch: Dispatch<Action>) => {
         const {data} = await createPosts(newPost)
+        console.log('create',data)
         dispatch({
             type: ActionType.CREATE,
             payload: data
@@ -25,12 +26,16 @@ export const create = (newPost: object) => {
 
 export const update = (_id: String, post: Object) => {
     return async(dispatch: Dispatch<Action>) => {
-        const data = await updatePost(_id, post)
-        console.log('update-action',data)
-        dispatch({
-            type: ActionType.UPDATE,
-            payload: [data]
-        })
+        try{
+            await updatePost(_id, post)
+            dispatch({
+                type: ActionType.UPDATE,
+                payload:[ _id, {...post,_id}]
+            })
+        }catch(e){
+            
+        }
+
     }
 }
 
@@ -46,21 +51,22 @@ export const createUser = (newUser: object) => {
 
 export const logInUser = (user: object) => {
     return async(dispatch: Dispatch<Action>) => {
-        const {data} = await logInUsers(user)
+        console.log('user info',user)
+        const {data, status} = await logInUsers(user)
         dispatch({
             type: ActionType.LOGIN_USER,
-            payload: data
+            payload: [data, status]
         })
     }
 }
 
 export const deletePosts = (postId: String) => {
-    return async() => {
-        let data: any = await deletePost(postId)
-        console.log('data -> ',data)
-        if (data.message){
-            data = data.message
-        }
+    return async(dispatch: Dispatch<Action>) => {
+        await deletePost(postId)
+        dispatch({
+            type: ActionType.DELETE,
+            payload: postId
+        })
     }
 }
 

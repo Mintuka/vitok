@@ -30,14 +30,13 @@ export const createPost = async (req:Request, res:Response) => {
     req.body.creator = req.body.user._id
     const { title, message, selectedFile, creator, tags } = req.body;
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
-    console.log('new', newPostMessage)
     try {
+        console.log('create', newPostMessage)
         await newPostMessage.save();
         console.log('b-post',newPostMessage)
 
         return res.status(201).json(newPostMessage );
     } catch (error) {
-        console.log('error',error)
         return res.status(409).json({ message: error.message });
     }
 }
@@ -49,7 +48,7 @@ export const updatePost = async (req:Request, res:Response) => {
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+    const updatedPost = { creator, title, message, tags, selectedFile};
 
     await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
 

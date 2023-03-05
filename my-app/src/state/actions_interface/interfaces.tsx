@@ -35,4 +35,9 @@ interface LogInUser{
     payload: Array<any>
 }
 
-export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment
+interface DELETE {
+    type: ActionType.DELETE
+    payload: String
+}
+
+export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment | DELETE

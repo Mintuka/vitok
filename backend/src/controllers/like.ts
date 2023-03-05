@@ -4,7 +4,8 @@ import PostMessage from "../models/postMessage";
 
 export const updatedLike = async (req:Request, res:Response) => { 
     const { postId } = req.params;
-    const { userId } = req.body
+    const { user } = req.body
+    const userId = user._id
     console.log(userId,'hello',postId)
     const post: any = await PostMessage.findById(postId);
     const like: any = await Like.findById(post.likeCount)

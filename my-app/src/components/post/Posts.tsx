@@ -16,7 +16,7 @@ const Posts = () => {
     getAll()
     getAllComments()
   },[])
-  
+  console.log(posts)
   return (
       <div className="flex flex-wrap justify-evenly">
         {
