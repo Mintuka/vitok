@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actions } from "../../state";
-import { RootState } from "../../state/reducers/index"
+import { RootState } from "../../state/reducers";
+import { Navigate } from 'react-router-dom'
 
 const SignUp = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const state = useSelector((state: RootState) => state.user)
+  const [user, setUser] = useState({email:'',password:''})
+  let { errorMessage, email } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch();
   const { createUser } = bindActionCreators(actions, dispatch)
   const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault()
-      createUser({email, password})
-      localStorage.setItem('user', JSON.stringify(state))
+      createUser({email:user.email, password:user.password})
   }
-
+  console.log('email',email,errorMessage)
+  
   return (
+    <div>
+        {
+            email && <Navigate to={'/'}/>
+        }
+        {
+            errorMessage && <div>{errorMessage}</div>
+        }
+
         <form className="w-full max-w-sm m-20" onSubmit={handleSubmit}>
             <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3">
@@ -25,7 +33,7 @@ const SignUp = () => {
                     </label>
                 </div>
                 <div className="md:w-2/3">
-                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" placeholder="Jane Doe" onChange={(e) => setEmail(e.target.value)}/>
+                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" placeholder="Jane Doe" value={user.email} onChange={(e) => setUser({...user, email: e.target.value})}/>
                 </div>
             </div>
 
@@ -36,7 +44,7 @@ const SignUp = () => {
                     </label>
                 </div>
                 <div className="md:w-2/3">
-                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)}/>
+                    <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password" placeholder="*********" value={user.password} onChange={(e) => setUser({...user, password:e.target.value})}/>
                 </div>
             </div>
 
@@ -49,6 +57,8 @@ const SignUp = () => {
                 </div>
             </div>
         </form>
+    </div>
+
     )
 };
 

@@ -40,12 +40,22 @@ export const update = (_id: String, post: Object) => {
 }
 
 export const createUser = (newUser: object) => {
-    return async(dispatch: Dispatch<Action>) => {
-        const {data} = await createUsers(newUser)
-        dispatch({
-            type: ActionType.CREATE_USER,
-            payload: data
-        })
+     return async(dispatch: Dispatch<Action>) => {
+        const { data, status } = await createUsers(newUser)
+        if (status === 200)
+        {
+            localStorage.setItem('user', JSON.stringify({email: data.email, token: data.token}))
+            dispatch({
+                type: ActionType.CREATE_USER,
+                payload: data
+            })
+        }
+        else{
+            dispatch({
+                type: ActionType.ERROR,
+                payload: data
+            })
+        }
     }
 }
 
@@ -53,10 +63,20 @@ export const logInUser = (user: object) => {
     return async(dispatch: Dispatch<Action>) => {
         console.log('user info',user)
         const {data, status} = await logInUsers(user)
-        dispatch({
-            type: ActionType.LOGIN_USER,
-            payload: [data, status]
-        })
+        if (status === 200)
+        {
+            localStorage.setItem('user', JSON.stringify({email: data.email, token: data.token}))
+            dispatch({
+                type: ActionType.LOGIN_USER,
+                payload: data
+            })
+        }
+        else{
+            dispatch({
+                type: ActionType.ERROR,
+                payload: data
+            })
+        }
     }
 }
 
@@ -93,10 +113,18 @@ export const createComments = (comment:any) => {
 
 export const getAllComments = () => {
     return async(dispatch: Dispatch<Action>) => {
-        const { data } = await getComments()
-        dispatch({
-            type: ActionType.GET_COMMENT,
-            payload: data
-        })
+        const { data, status } = await getComments()
+        if (status === 200){
+            dispatch({
+                type: ActionType.GET_COMMENT,
+                payload: data
+            })
+        }else{
+            dispatch({
+                type: ActionType.GET_COMMENT,
+                payload: data
+            })
+        }
+
     }
 }

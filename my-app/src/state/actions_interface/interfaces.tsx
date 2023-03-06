@@ -27,12 +27,12 @@ interface Update{
 
 interface CreateUser{
     type: ActionType.CREATE_USER,
-    payload: Array<any>
+    payload: any
 }
 
 interface LogInUser{
     type: ActionType.LOGIN_USER
-    payload: Array<any>
+    payload: any
 }
 
 interface DELETE {
@@ -40,4 +40,14 @@ interface DELETE {
     payload: String
 }
 
-export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment | DELETE
+interface ERROR {
+    type: ActionType.ERROR
+    payload: any
+}
+
+interface LOG_OUT{
+    type: ActionType.LOG_OUT,
+    payload: String
+}
+
+export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment | DELETE | ERROR | LOG_OUT

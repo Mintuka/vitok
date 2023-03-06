@@ -1,11 +1,10 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
 
-export const commentReducer = (state: Array<any> = [], action: Action) => {
+export const commentReducer = ( action: Action) => {
     const st = {
         comments: [],
-        hasError: false,
-        filteredComments: [],
+        errorMessage: ''
     } 
     switch(action.type){
         case ActionType.GET_COMMENT:
@@ -16,9 +15,15 @@ export const commentReducer = (state: Array<any> = [], action: Action) => {
                 comments: [
                     ...st.comments,
                     action.payload
-                ]
+                ],
+                errorMessage:''
+            }
+        case ActionType.ERROR:
+            return {
+                ...st,
+                errorMessage: action.payload.message
             }
         default:
-            return state
+            return st
         }
 }

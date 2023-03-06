@@ -7,6 +7,10 @@ export const signup = async(req: Request, res: Response) => {
     try{
         console.log('signup')
         const {email, password} = req.body
+        const isExistingUser = await User.findOne({email})
+        if (isExistingUser){
+            return res.status(400).json({message: 'email is already registered'})
+        }
         const salt = await bcrypt.genSalt()
         const hash = await bcrypt.hash(password,salt)
         const user: IUser = await User.create({email:email,password:hash})

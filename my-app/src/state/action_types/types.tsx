@@ -6,5 +6,7 @@ export enum ActionType {
     GET_COMMENT = "GET_COMMENT",
     CREATE_USER = "CREATE_USER",
     LOGIN_USER = "LOGIN_USER",
-    DELETE = "DELETE"
+    DELETE = "DELETE",
+    LOG_OUT = "LOG_OUT",
+    ERROR = "ERROR"
 }

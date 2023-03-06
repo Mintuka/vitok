@@ -15,23 +15,41 @@ const authAxios = axios.create({
     }
 })
 export const fetchPosts = () => axios.get(url+'/posts')
+
 export const createPosts = (newPost: Object) => authAxios.post(url+'/posts', newPost)
+                            .catch(error => {
+                                return {data: error.response.data, status: error.response.status}
+                            })
 export const updatePost = (id: String, update: Object) => authAxios.put<Action>(url+`/posts/${id}`, update)
                             .catch(error => {
-                                return {updateMessage: error.response.data}
+                                return {data: error.response.data, status: error.response.status}
                             })
 
 export const deletePost = (_id: String) => authAxios.delete(url+`/posts/${_id}`)
                             .catch(error => {
-                                return {deleteMessage: error.response.data}
+                                return {data: error.response.data, status: error.response.status}
                             })
 export const likePost = (postId: String) => authAxios.get(url+`/like/${postId}`)
                             .catch(error => {
-                                return {likeMessage: error}
+                                return {data: error.response.data, status: error.response.status}
                             })
 
 export const getComments = () => axios.get(url+'/comments')
+                                        .catch(error => {
+                                            return {data: error.response.data, status: error.response.status}
+                                        })
+
 export const createComment = (newComment: Object) => authAxios.post(url+'/comments', newComment)
+                                                            .catch(error => {
+                                                                return {data: error.response.data, status: error.response.status}
+                                                            })
 
 export const createUsers = (newUser: Object) => axios.post(url+'/users', newUser)
+                                                .catch(error => {
+                                                    return {data: error.response.data, status: error.response.status}
+                                                })
+
 export const logInUsers = (user: Object) => axios.post(url+'/users/login', user)
+                                                .catch(error => {
+                                                    return {data: error.response.data, status: error.response.status}
+                                                })
