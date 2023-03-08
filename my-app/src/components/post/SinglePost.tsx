@@ -21,11 +21,13 @@ const handleBiDot = (setChange:any, setBiDot:any) => {
 
 const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const { userId } = useSelector((state: RootState) => state.user)
-  const [commentClass, setCommentClass] = useState('invisible')
   const [likeCount, setLikeCount] = useState(likeId.userId.length)
   const [like, setLike] = useState(likeId ? likeId.userId.filter((id:any) => id === userId).length > 0: false)
+
   const dispatch = useDispatch();
   const { deletePosts, likePosts } = bindActionCreators(postActions, dispatch)
+
+  const [commentClass, setCommentClass] = useState('invisible')
   const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
   const [change, setChange] = useState('invisible')
 
@@ -47,7 +49,8 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
               <p className='p-2'>{message}</p>
               <div className='p-2 flex items-center justify-around'>
                 <div className='p-2 flex items-center'>
-                  {like ? <AiFillLike onClick={() => {likePosts(_id); setLike(false); setLikeCount((likeCount:number) => likeCount-1)}}/> : <AiOutlineLike onClick={() => {likePosts(_id); setLike(true); setLikeCount((likeCount:number) => likeCount+1)}}/>}
+                  {like ? <AiFillLike onClick={() => {likePosts(_id); setLike(false); setLikeCount((likeCount:number) => likeCount-1)}}/> : 
+                          <AiOutlineLike onClick={() => {likePosts(_id); setLike(true); setLikeCount((likeCount:number) => likeCount+1)}}/>}
                   <h6 className='mx-2'>{ likeCount }</h6>
                 </div>
                 <BiCommentDetail onClick={() => setCommentClass('visible border')}/>

@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/', getComments);
 router.post('/', createComment);
 router.get('/:id', getComment);
+router.put('/:id', updateComment)
 router.patch('/:id', updateComment);
 router.delete('/:id', deleteComment);
 

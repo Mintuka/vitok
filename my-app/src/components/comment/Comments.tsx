@@ -29,12 +29,12 @@ const Comments = ({ post, creator }:{post: String, creator: string}) => {
         <label htmlFor="comment">Comment</label>
         <div className="flex">
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="comment" placeholder="write comment" value={comment} onChange={(e) => setComment(e.target.value)}/>
-          {true ? <button className="border bg-blue-500 text-white p-2" onClick={createComment}>comment</button> : <button>edit</button>}
+          <button className="border bg-blue-500 text-white p-2" onClick={ createComment }>comment</button>
         </div>
       </div>
       <div>
         {
-          postComments.map((comment, index: number) =>  <Comment key={index} comment={comment}/>)          
+          postComments.map((comment, index: number) =>  <Comment key={index} {...comment}/>)          
         }
       </div>
 

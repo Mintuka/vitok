@@ -34,9 +34,17 @@ export const commentReducer = (state: TypeComment = {comments:[], errorMessage:'
                 } 
                 return comment
             })
+            console.log('Comment-Update-Action', updated)
             return {
                 ...state,
                 comments: [...updated],
+                errorMessage: ''
+            }
+
+        case ActionType.DELETE_COMMENT:
+            return {
+                ...state,
+                comments: state.comments.filter((comment) => comment._id !== action.payload),
                 errorMessage: ''
             }
 

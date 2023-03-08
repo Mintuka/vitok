@@ -4,13 +4,11 @@ import { postProps } from "../../components/post/SinglePost"
 
 type StateType = {
     posts: Array<any>,
-    likes: Array<any>,
     isLoading: boolean  
 }
 
 export const postReducer = (state: StateType = {
     posts: [],
-    likes: [],
     isLoading: true
 }, action: Action) => {
 
@@ -21,12 +19,14 @@ export const postReducer = (state: StateType = {
                 posts: action.payload,
                 isLoading: false
             }
+
         case ActionType.CREATE_POST:
             return {
                 ...state,
                 posts:[...state.posts, action.payload],
                 isLoading: false
             }
+
         case ActionType.UPDATE_POST:
             const updated = state.posts.map((post) => {
                 if (post._id === action.payload[0]){
@@ -46,12 +46,13 @@ export const postReducer = (state: StateType = {
                 posts: state.posts.filter((post: postProps) => post._id !== action.payload),
                 isLoading: false
             }
+
         case ActionType.LIKE_POST:
             return {
                 ...state,
-                posts: [...state.posts],
-                likes: action.payload.userId
+                posts: [...state.posts]
             }
+
         default:
             return state
         }

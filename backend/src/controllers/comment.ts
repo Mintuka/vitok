@@ -40,15 +40,13 @@ export const createComment = async (req:Request, res:Response) => {
 
 export const updateComment = async (req:Request, res:Response) => { 
     const { id } = req.params;
-    const { creator, post, comment } = req.body;
+    const { updatedComment } = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Comment with id: ${id}`);
 
-    const updatedComment = { creator, post, comment, _id: id };
-
-    await Comment.findByIdAndUpdate(id, updatedComment, { new: true });
-
-    res.json(updatedComment);
+    const updated = await Comment.findByIdAndUpdate(id, {comment:updatedComment}, { new: true });
+    console.log('updatedComment',updated)
+    res.status(200).json(updated);
 }
 
 export const deleteComment = async (req:Request, res:Response) => { 

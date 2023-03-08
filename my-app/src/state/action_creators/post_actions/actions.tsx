@@ -63,8 +63,8 @@ export const updatePost = (_id: String, post: Object) => {
 
 export const deletePosts = (postId: String) => {
     return async(dispatch: Dispatch<Action>) => {
-        const { data, status } = await deletePost(postId)
-        if (status == 200){
+        const { status } = await deletePost(postId)
+        if (status === 200){
             dispatch({
                 type: ActionType.DELETE_POST,
                 payload: postId
