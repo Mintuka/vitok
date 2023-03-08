@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { actions } from "../../state";
+import { postActions } from "../../state";
 import { RootState } from "../../state/reducers";
 
 const UpdatePost = () => {
@@ -11,10 +11,10 @@ const UpdatePost = () => {
   const oldPost: any = posts.find(post => post._id === id)
   const [post, setPost] = useState({title: oldPost.title, message:oldPost.message,tags: oldPost.tags,selectedFile:oldPost.selectedFile,creator:oldPost.creator, likeCount:oldPost.likeCount})
   const dispatch = useDispatch();
-  const { update } = bindActionCreators(actions, dispatch)
+  const { updatePost } = bindActionCreators(postActions, dispatch)
   const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault()
-      update(id || '', post)
+      updatePost(id || '', post)
   }
   return (
         <div className="m-1 flex">

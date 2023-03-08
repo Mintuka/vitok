@@ -10,13 +10,13 @@ import Posts from "./components/post/Posts";
 import UpdatePost from "./components/post/UpdatePost";
 import SignIn from "./components/user/SignIn";
 import SignUp from "./components/user/SignUp";
-import { actions } from "./state";
+import { postActions } from "./state";
 import { RootState } from "./state/reducers";
 
 const App = () => {
   const { posts, isLoading } = useSelector((state: RootState) => state.post)
   const dispatch = useDispatch();
-  const { getAllPosts } = bindActionCreators(actions, dispatch)
+  const { getAllPosts } = bindActionCreators(postActions, dispatch)
 
   useEffect(() => {
     getAllPosts()

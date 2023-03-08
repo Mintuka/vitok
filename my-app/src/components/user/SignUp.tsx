@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actions } from "../../state";
+import { userActions } from "../../state";
 import { RootState } from "../../state/reducers";
 import { Navigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ const SignUp = () => {
   const [user, setUser] = useState({email:'',password:''})
   let { errorMessage, email } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch();
-  const { createUser } = bindActionCreators(actions, dispatch)
+  const { createUser } = bindActionCreators(userActions, dispatch)
   const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault()
       createUser({email:user.email, password:user.password})

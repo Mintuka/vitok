@@ -1,5 +1,5 @@
 import { ActionType } from "../action_types/types"
-import { Action } from "../actions_interface/interfaces"
+import { Action } from "../actions_interface/post_interface/interfaces"
 import { postProps } from "../../components/post/SinglePost"
 
 type StateType = {
@@ -21,13 +21,13 @@ export const postReducer = (state: StateType = {
                 posts: action.payload,
                 isLoading: false
             }
-        case ActionType.CREATE:
+        case ActionType.CREATE_POST:
             return {
                 ...state,
                 posts:[...state.posts, action.payload],
                 isLoading: false
             }
-        case ActionType.UPDATE:
+        case ActionType.UPDATE_POST:
             const updated = state.posts.map((post) => {
                 if (post._id === action.payload[0]){
                     return action.payload[1]
@@ -40,13 +40,13 @@ export const postReducer = (state: StateType = {
                 isLoading: false
             }
 
-        case ActionType.DELETE:
+        case ActionType.DELETE_POST:
             return {
                 ...state,
                 posts: state.posts.filter((post: postProps) => post._id !== action.payload),
                 isLoading: false
             }
-        case ActionType.LIKE:
+        case ActionType.LIKE_POST:
             return {
                 ...state,
                 posts: [...state.posts],

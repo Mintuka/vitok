@@ -1,5 +1,5 @@
 import { ActionType } from "../action_types/types"
-import { Action } from "../actions_interface/interfaces"
+import { Action } from "../actions_interface/user_interface/interfaces"
 
 type UserType = {
     email: string,
@@ -17,7 +17,7 @@ export const userReducer = (state: UserType = { email:'', errorMessage:'', userI
                 userId: action.payload.decoded._id,
                 errorMessage: ''
             }
-        case ActionType.ERROR:
+        case ActionType.USER_ERROR:
             return {
                 ...state,
                 errorMessage: action.payload.message

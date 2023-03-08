@@ -5,7 +5,7 @@
 import React,{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import { actions } from "../../state"
+import { postActions } from "../../state"
 import { BiCommentDetail, BiDotsVertical } from 'react-icons/bi'
 import { FaShare } from 'react-icons/fa'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
@@ -25,7 +25,7 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const [likeCount, setLikeCount] = useState(likeId.userId.length)
   const [like, setLike] = useState(likeId ? likeId.userId.filter((id:any) => id === userId).length > 0: false)
   const dispatch = useDispatch();
-  const { deletePosts, likePosts } = bindActionCreators(actions, dispatch)
+  const { deletePosts, likePosts } = bindActionCreators(postActions, dispatch)
   const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
   const [change, setChange] = useState('invisible')
 

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actions } from "../../state";
-import { ActionType } from "../../state/action_types/types";
+import { commentActions } from "../../state";
 import { RootState } from "../../state/reducers";
 import Comment from "./Comment";
 
@@ -10,9 +9,8 @@ const Comments = ({ post, creator }:{post: String, creator: string}) => {
   
   const { comments } = useSelector((state: RootState) => state.comment)
   const postComments = comments.filter((comment) => comment.post === post)
-  console.log(comments, postComments)
   const dispatch = useDispatch();
-  const { createComments, getAllComments } = bindActionCreators(actions, dispatch)
+  const { createComments, getAllComments } = bindActionCreators(commentActions, dispatch)
   const [comment, setComment] = useState('')
   
   const createComment = () => {

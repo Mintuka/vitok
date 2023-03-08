@@ -1,5 +1,5 @@
 import { ActionType } from "../action_types/types"
-import { Action } from "../actions_interface/interfaces"
+import { Action } from "../actions_interface/comment_interface/interfaces"
 
 type TypeComment = {
     comments: Array<any>,
@@ -27,7 +27,20 @@ export const commentReducer = (state: TypeComment = {comments:[], errorMessage:'
                 errorMessage:''
             }
 
-        case ActionType.ERROR:
+        case ActionType.UPDATE_COMMENT:
+            const updated = state.comments.map((comment) => {
+                if (comment._id === action.payload[0]){
+                    return action.payload[1]
+                } 
+                return comment
+            })
+            return {
+                ...state,
+                comments: [...updated],
+                errorMessage: ''
+            }
+
+        case ActionType.COMMENT_ERROR:
             return {
                 ...state,
                 errorMessage: action.payload.message

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actions } from "../../state";
+import { userActions } from "../../state";
 
 const SignIn = () => {
     const [user, setUser] = useState({email:'',password:''})
     const dispatch = useDispatch();
-    const { logInUser } = bindActionCreators(actions, dispatch)
+    const { logInUser } = bindActionCreators(userActions, dispatch)
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
         logInUser({...user})

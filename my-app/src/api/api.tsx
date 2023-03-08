@@ -1,5 +1,6 @@
 import axios from "axios"
-import { Action } from "../state/actions_interface/interfaces"
+import { Action as commentAction } from "../state/actions_interface/comment_interface/interfaces"
+import { Action as postAction } from "../state/actions_interface/post_interface/interfaces"
 
 const url = 'http://localhost:5000'
 var token = ''
@@ -15,6 +16,7 @@ const authAxios = axios.create({
         Authorization: `Bearer ${token}`
     }
 })
+
 export const fetchPosts = () => axios.get(url+'/posts')
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
@@ -24,7 +26,7 @@ export const createPosts = (newPost: Object) => authAxios.post(url+'/posts', new
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })
-export const updatePost = (id: String, update: Object) => authAxios.put<Action>(url+`/posts/${id}`, update)
+export const updatePosts = (id: String, update: Object) => authAxios.put<postAction>(url+`/posts/${id}`, update)
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })
@@ -53,7 +55,7 @@ export const deleteComment = (commentId: String) => authAxios.delete(url+`/comme
                                 return {data: error.response.data, status: error.response.status}
                             })
 
-export const updateComment = (id: String, update: Object) => authAxios.put<Action>(url+`/comments/${id}`, update)
+export const updateComment = (id: String, update: Object) => authAxios.put<commentAction>(url+`/comments/${id}`, update)
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })
