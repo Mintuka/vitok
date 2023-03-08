@@ -45,7 +45,6 @@ export const updateComment = async (req:Request, res:Response) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Comment with id: ${id}`);
 
     const updated = await Comment.findByIdAndUpdate(id, {comment:updatedComment}, { new: true });
-    console.log('updatedComment',updated)
     res.status(200).json(updated);
 }
 

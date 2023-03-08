@@ -9,13 +9,13 @@ interface JwtPayload {
 
 export const isAuthenticated = async(req:Request, res:Response, next:NextFunction) => {
     const { authorization } = req.headers
+
     if (!authorization)
-        return res.status(401).json({error: 'Authorization tokend required'})
-    console.log('auth',authorization)
+        return res.status(401).json({error: 'Authorization token required'})
     const token = authorization.split(' ')[1]
-    console.log('token',token)
+    
     if ( !token )
-        return res.status(401).json({error: 'Authorization tokend required'})
+        return res.status(401).json({error: 'Authorization token required'})
 
     try{
         const {_id} = jwt.verify(token, secret) as JwtPayload

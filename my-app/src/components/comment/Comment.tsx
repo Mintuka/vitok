@@ -13,7 +13,6 @@ const Comment = ({ comment, post, creator, _id }: {comment: string, post: string
   
   const updateComment = () => {
     if (updatedComment){
-      console.log('Comment-Component-Update',updatedComment)
       updateComments(_id, {updatedComment})
     } 
     setEdit(false)

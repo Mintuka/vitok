@@ -5,7 +5,6 @@ export const isAuthorized = async(req: Request, res: Response, next: NextFunctio
     const { user } = req.body
     const { id } = req.params
     const post:any = await PostMessage.findOne({_id: id}).lean().exec()
-    console.log(post.creator, user._id, 'compare')
     if (post.creator.toString() === user._id.toString()){
         return next()
     }else{
