@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
     },
     tags: [String],
     selectedFile: String,
-    likeCount: {
+    likeId: {
         type: Schema.Types.ObjectId,
         ref: 'Like'
     },

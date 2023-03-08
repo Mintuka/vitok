@@ -12,7 +12,7 @@ interface Create{
 
 interface CreateComment{
     type: ActionType.CREATE_COMMENT,
-    payload: Array<any>
+    payload: any
 }
 
 interface GetComment{
@@ -22,7 +22,7 @@ interface GetComment{
 
 interface Update{
     type: ActionType.UPDATE,
-    payload: Array<any>
+    payload: any
 }
 
 interface CreateUser{
@@ -50,4 +50,14 @@ interface LOG_OUT{
     payload: String
 }
 
-export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment | DELETE | ERROR | LOG_OUT
+interface LIKE {
+    type: ActionType.LIKE,
+    payload: any
+}
+
+interface LIKE_ERROR {
+    type: ActionType.LIKE_ERROR,
+    payload: any
+}
+
+export type Action = GetAll | Create | CreateUser | LogInUser | Update | CreateComment | GetComment | DELETE | ERROR | LOG_OUT | LIKE | LIKE_ERROR

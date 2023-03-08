@@ -4,13 +4,11 @@ import { useParams } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { actions } from "../../state";
 import { RootState } from "../../state/reducers";
-import { postProps } from "./SinglePost";
 
 const UpdatePost = () => {
-  const posts: postProps[] = useSelector((state: RootState) => state.post)
+  const { posts } = useSelector((state: RootState) => state.post)
   const {id} = useParams()
   const oldPost: any = posts.find(post => post._id === id)
-  console.log('params',id,oldPost, posts)
   const [post, setPost] = useState({title: oldPost.title, message:oldPost.message,tags: oldPost.tags,selectedFile:oldPost.selectedFile,creator:oldPost.creator, likeCount:oldPost.likeCount})
   const dispatch = useDispatch();
   const { update } = bindActionCreators(actions, dispatch)

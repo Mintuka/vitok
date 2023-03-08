@@ -1,33 +1,38 @@
+/*
+1. unauthorized user => like, comment
+*/
+
 import React,{ useState } from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
 import { actions } from "../../state"
-import {BiCommentDetail, BiDotsVertical} from 'react-icons/bi'
-import {FaShare} from 'react-icons/fa'
-import {AiFillLike, AiOutlineLike} from 'react-icons/ai'
+import { BiCommentDetail, BiDotsVertical } from 'react-icons/bi'
+import { FaShare } from 'react-icons/fa'
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-export interface postProps {_id: String,creator:String, tags:String[], title:String, selectedFile:String, message:String,likeCount:any, comments:object[]}
+import Comments from "../comment/Comments";
+import { RootState } from "../../state/reducers";
+export interface postProps {_id: String,creator:String, tags:String[], title:String, selectedFile:String, message:String,likeId:any}
 
 const handleBiDot = (setChange:any, setBiDot:any) => {
   setChange('visible absolute right-1 border cursor-pointer')
   setBiDot('invisible m-0')
 }
 
-const Post = ({_id, creator, tags, title, message,likeCount, comments}:postProps) => {
-  const userId = '63cdc6e0b73f3f412d7409bd'
-  const postComments: any = comments.filter((com:any) => com.post === _id)
+const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
+  const { userId } = useSelector((state: RootState) => state.user)
   const [commentClass, setCommentClass] = useState('invisible')
-  const [comment, setComment] = useState({creator:userId,post:_id,comment:''})
-  const [like, setLike] = useState(likeCount ? likeCount.userId.filter((id:any) => id === userId).length: 0)
+  const [likeCount, setLikeCount] = useState(likeId.userId.length)
+  const [like, setLike] = useState(likeId ? likeId.userId.filter((id:any) => id === userId).length > 0: false)
   const dispatch = useDispatch();
-  const { deletePosts, likePosts, createComments } = bindActionCreators(actions, dispatch)
+  const { deletePosts, likePosts } = bindActionCreators(actions, dispatch)
   const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
   const [change, setChange] = useState('invisible')
 
   return (
         <div className="m-3 border w-64">
             <div className="relative border" >
-              <BiDotsVertical className={BiDotsClass} size={20} onClick={() => handleBiDot(setChange,setBiDotsClas)}/>
+              <BiDotsVertical className={ BiDotsClass } size={20} onClick={() => handleBiDot(setChange,setBiDotsClas)}/>
               <div className={change}>
                 <Link to={`/update/${_id}`} className='text-green-300 border'>update</Link>
                 <div onClick={() => deletePosts(_id)} className='text-red-400 border'>delete</div>
@@ -42,22 +47,15 @@ const Post = ({_id, creator, tags, title, message,likeCount, comments}:postProps
               <p className='p-2'>{message}</p>
               <div className='p-2 flex items-center justify-around'>
                 <div className='p-2 flex items-center'>
-                  {like ? <AiFillLike onClick={() => {likePosts(_id); setLike(false)}}/> : <AiOutlineLike onClick={() => {likePosts(_id); setLike(true)}}/>}
-                  <h6 className='mx-2'>{likeCount ? likeCount.userId.length : 0}</h6>
+                  {like ? <AiFillLike onClick={() => {likePosts(_id); setLike(false); setLikeCount((likeCount:number) => likeCount-1)}}/> : <AiOutlineLike onClick={() => {likePosts(_id); setLike(true); setLikeCount((likeCount:number) => likeCount+1)}}/>}
+                  <h6 className='mx-2'>{ likeCount }</h6>
                 </div>
                 <BiCommentDetail onClick={() => setCommentClass('visible border')}/>
                 <FaShare/>
               </div>
               <div className={commentClass}>
-                <input type="text" className="border-bottom-width: md:50px " placeholder="comment on my post" onChange={(e) => setComment({...comment, comment:e.target.value})}/>
-                <br/>
-                <button type="submit" className="text-blue-300 bg-black" onClick={() => createComments(comment)}>comment</button>
                 {
-                  postComments.map((comment:any) => {
-                    <div>
-                      comment.comment
-                    </div>
-                  })
+                    <Comments post={ _id } creator={ userId }/>
                 }
               </div>
             </div>

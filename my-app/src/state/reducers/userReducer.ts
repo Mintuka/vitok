@@ -1,31 +1,39 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
 
-export const userReducer = (state: Array<any> = [], action: Action) => {
-    const st = {
-        email:'',
-        errorMessage: ''
-    }
+type UserType = {
+    email: string,
+    errorMessage: string,
+    userId: string
+}
+
+export const userReducer = (state: UserType = { email:'', errorMessage:'', userId:'' }, action: Action) => {
+    
     switch(action.type){
         case ActionType.CREATE_USER:
             return {
+                ...state,
                 email: action.payload.email,
+                userId: action.payload.decoded._id,
                 errorMessage: ''
             }
         case ActionType.ERROR:
             return {
-                ...st,
+                ...state,
                 errorMessage: action.payload.message
             }
         case ActionType.LOGIN_USER:
             return {
+                ...state,
                 email: action.payload.email,
+                userId: action.payload.decoded._id,
                 errorMessage: ''
             }
         case ActionType.LOG_OUT:
             return {
-                ...st,
-                email: ''
+                ...state,
+                email: action.payload,
+                userId: action.payload
             }
         default:
             return state

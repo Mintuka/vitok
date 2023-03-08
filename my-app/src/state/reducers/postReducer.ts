@@ -1,25 +1,57 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
-import { update } from "../action_creators/actions"
+import { postProps } from "../../components/post/SinglePost"
 
-export const postReducer = (state: Array<any> = [], action: Action) => {
+type StateType = {
+    posts: Array<any>,
+    likes: Array<any>,
+    isLoading: boolean  
+}
+
+export const postReducer = (state: StateType = {
+    posts: [],
+    likes: [],
+    isLoading: true
+}, action: Action) => {
+
     switch(action.type){
         case ActionType.GET_ALL:
-            return action.payload
+            return {
+                ...state,
+                posts: action.payload,
+                isLoading: false
+            }
         case ActionType.CREATE:
-            return [...state,action.payload]
+            return {
+                ...state,
+                posts:[...state.posts, action.payload],
+                isLoading: false
+            }
         case ActionType.UPDATE:
-            const updated = state.map((p) => {
-                if (p._id === action.payload[0]){
-                    console.log('change', action.payload[1], p)
+            const updated = state.posts.map((post) => {
+                if (post._id === action.payload[0]){
                     return action.payload[1]
                 } 
-                return p
+                return post
             })
-            console.log('updated',updated)
-            return updated
+            return {
+                ...state,
+                posts: [...updated],
+                isLoading: false
+            }
+
         case ActionType.DELETE:
-            return state.filter((p) => p._id !== action.payload)
+            return {
+                ...state,
+                posts: state.posts.filter((post: postProps) => post._id !== action.payload),
+                isLoading: false
+            }
+        case ActionType.LIKE:
+            return {
+                ...state,
+                posts: [...state.posts],
+                likes: action.payload.userId
+            }
         default:
             return state
         }

@@ -5,29 +5,27 @@ import PostMessage from "../models/postMessage";
 export const updatedLike = async (req:Request, res:Response) => { 
     const { postId } = req.params;
     const { user } = req.body
-    const userId = user._id
-    console.log(userId,'hello',postId)
+    console.log(user,'hello like',postId)
     const post: any = await PostMessage.findById(postId);
-    const like: any = await Like.findById(post.likeCount)
+    const like: any = await Like.findById(post.likeId)
     let updatedLike = {}
     if (like){
-        const isFound = userId._id.toString() === like.userId.find(id => id === userId._id.toString())
-        console.log('is',isFound)
+        const isFound = user._id.toString() === like.userId.find(id => id === user._id.toString())
         if(isFound){
-            const likes = like.userId.filter(id => id !== userId._id.toString())
+            const likes = like.userId.filter(id => id !== user._id.toString())
             console.log('like',likes)
             updatedLike = await Like.findByIdAndUpdate(like._id, {userId: likes}, {new: true});
         }
         else{
-            const likes = [...like.userId, userId._id]
+            const likes = [...like.userId, user._id]
             console.log('like',likes)
             updatedLike = await Like.findByIdAndUpdate(like._id, { userId: likes }, { new: true }); 
         }
         
     }
     else{
-        const updatedLike = await Like.create({userId: [userId._id]})
-        const updatePost = await PostMessage.findByIdAndUpdate(postId, {likeCount: updatedLike._id}, {new: true})
+        const updatedLike = await Like.create({userId: [user._id]})
+        const updatePost = await PostMessage.findByIdAndUpdate(postId, {likeId: updatedLike._id}, {new: true})
     }
     
     return res.json(updatedLike);

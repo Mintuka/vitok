@@ -7,7 +7,7 @@ const router = express.Router();
 
 export const getPosts = async (req:Request, res:Response) => { 
     try {
-        const postMessages = await PostMessage.find().populate('likeCount').lean().exec();
+        const postMessages = await PostMessage.find().populate('likeId').lean().exec();
         res.status(200).json(postMessages);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -18,7 +18,7 @@ export const getPost = async (req:Request, res:Response) => {
     const { id } = req.params;
 
     try {
-        const post = await PostMessage.findById(id).populate('likeCount').lean().exec();
+        const post = await PostMessage.findById(id).populate('likeId').lean().exec();
         res.status(200).json(post);
     } catch (error) {
         res.status(404).json({ message: error.message });

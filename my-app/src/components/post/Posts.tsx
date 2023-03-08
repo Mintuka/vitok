@@ -1,26 +1,12 @@
-import React,{useEffect} from "react";
-import { useSelector, useDispatch } from "react-redux"
-import { bindActionCreators } from "redux"
-import { actions } from "../../state"
-import { RootState } from "../../state/reducers"
 import Post,{postProps} from "./SinglePost";
 
 
-const Posts = () => {
-
-  const posts = useSelector((state: RootState) => state.post)
-  const comments: object[] = useSelector((state: RootState) => state.comment)
-  const dispatch = useDispatch();
-  const { getAll, getAllComments } = bindActionCreators(actions, dispatch)
-  useEffect(() => {
-    getAll()
-    getAllComments()
-  },[])
-  console.log(posts)
+const Posts = ({ posts }:{posts: Array<any>}) => {
+  
   return (
       <div className="flex flex-wrap justify-evenly">
         {
-          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} comments={comments} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeCount={post.likeCount} selectedFile={post.selectedFile}></Post>)
+          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeId={post.likeId} selectedFile={post.selectedFile}></Post>)
         }
       </div>
     )

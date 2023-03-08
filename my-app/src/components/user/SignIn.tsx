@@ -1,28 +1,19 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actions } from "../../state";
-import { RootState } from "../../state/reducers";
 
 const SignIn = () => {
     const [user, setUser] = useState({email:'',password:''})
-    let {email, errorMessage} = useSelector((state: RootState) => state.user)
     const dispatch = useDispatch();
     const { logInUser } = bindActionCreators(actions, dispatch)
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        logInUser({email: user.email, password: user.password})
+        logInUser({...user})
     }
 
   return (
     <div>
-        {
-            email && <Navigate to={'/'}/>
-        }
-        {
-            errorMessage && <div>{errorMessage}</div>
-        }
         <div className="w-full max-w-xs ">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -40,7 +31,7 @@ const SignIn = () => {
                 </div>            
                 
                 <div className="flex items-center justify-between">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Sign In
                     </button>
                     <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">

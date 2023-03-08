@@ -8,5 +8,7 @@ export enum ActionType {
     LOGIN_USER = "LOGIN_USER",
     DELETE = "DELETE",
     LOG_OUT = "LOG_OUT",
-    ERROR = "ERROR"
+    ERROR = "ERROR",
+    LIKE = "LIKE",
+    LIKE_ERROR = "LIKE_ERROR"
 }

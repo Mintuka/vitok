@@ -14,7 +14,6 @@ const SignUp = () => {
       e.preventDefault()
       createUser({email:user.email, password:user.password})
   }
-  console.log('email',email,errorMessage)
   
   return (
     <div>

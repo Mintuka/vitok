@@ -1,29 +1,38 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/interfaces"
 
-export const commentReducer = ( action: Action) => {
-    const st = {
-        comments: [],
-        errorMessage: ''
-    } 
+type TypeComment = {
+    comments: Array<any>,
+    errorMessage: string
+}
+
+export const commentReducer = (state: TypeComment = {comments:[], errorMessage:''} , action: Action) => {
+
     switch(action.type){
         case ActionType.GET_COMMENT:
-            return action.payload
-        case ActionType.CREATE_COMMENT:
+
             return {
-                ...st,
+                ...state,
+                comments: [...action.payload],
+                errorMessage: ''
+            }
+            
+        case ActionType.CREATE_COMMENT:
+            return  {
+                ...state,
                 comments: [
-                    ...st.comments,
-                    action.payload
+                    action.payload,
+                    ...state.comments
                 ],
                 errorMessage:''
             }
+
         case ActionType.ERROR:
             return {
-                ...st,
+                ...state,
                 errorMessage: action.payload.message
             }
         default:
-            return st
+            return state
         }
 }
