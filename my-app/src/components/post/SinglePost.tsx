@@ -5,7 +5,7 @@ import { postActions } from "../../state"
 import { BiCommentDetail, BiDotsVertical } from 'react-icons/bi'
 import { FaShare } from 'react-icons/fa'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Comments from "../comment/Comments";
 import { RootState } from "../../state/reducers";
 export interface postProps {_id: String,creator:String, tags:String[], title:String, selectedFile:String, message:String,likeId:any}
@@ -17,8 +17,8 @@ const handleBiDot = (setChange:any, setBiDot:any) => {
 
 const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const { userId } = useSelector((state: RootState) => state.user)
-  const [likeCount, setLikeCount] = useState(likeId.userId.length)
-  const [like, setLike] = useState(likeId ? likeId.userId.filter((id:any) => id === userId).length > 0: false)
+  const [likeCount, setLikeCount] = useState(likeId && likeId?.userId ? likeId?.userId?.length : 0)
+  const [like, setLike] = useState(likeId && likeId?.userId ? likeId?.userId?.filter((id:any) => id === userId).length > 0: false)
 
   const dispatch = useDispatch();
   const { deletePosts, likePosts } = bindActionCreators(postActions, dispatch)
@@ -26,9 +26,11 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const [commentClass, setCommentClass] = useState('invisible')
   const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
   const [change, setChange] = useState('invisible')
-
+  const navigate = useNavigate()
+  console.log('like-users',likeId?.userId)
+  console.log('like-Count',likeCount)
   return (
-        <div className="m-3 border w-64">
+        <div className="m-3 border">
             <div className="relative border" >
               <BiDotsVertical className={ BiDotsClass } size={20} onClick={() => handleBiDot(setChange,setBiDotsClas)}/>
               <div className={change}>
@@ -37,7 +39,7 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
               </div>
               <h4 className='p-2'>{creator}</h4>
               <h6 className='p-2'>2 hours ago</h6>
-              <img className="p-2" src="/logo192.png" alt="img" />
+              <img className="p-2" src="/people.png" alt="img" />
             </div>
             <div>
               <h5 className='p-2'>{tags}</h5>
@@ -45,8 +47,21 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
               <p className='p-2'>{message}</p>
               <div className='p-2 flex items-center justify-around'>
                 <div className='p-2 flex items-center'>
-                  {like ? <AiFillLike onClick={() => {likePosts(_id); setLike(false); setLikeCount((likeCount:number) => likeCount-1)}}/> : 
-                          <AiOutlineLike onClick={() => {likePosts(_id); setLike(true); setLikeCount((likeCount:number) => likeCount+1)}}/>}
+                  {
+                    like ? <AiFillLike onClick={() => {
+                                if (!userId){
+                                  navigate('/signin')
+                                  return
+                                }
+                                likePosts(_id); 
+                                setLike(false); 
+                                setLikeCount((likeCount:number) => likeCount-1)
+                              }}/> : 
+                           <AiOutlineLike onClick={() => { 
+                                likePosts(_id); 
+                                setLike(true); 
+                                setLikeCount((likeCount:number) => likeCount+1)}}/>
+                  }
                   <h6 className='mx-2'>{ likeCount }</h6>
                 </div>
                 <BiCommentDetail onClick={() => setCommentClass('visible border')}/>

@@ -24,7 +24,6 @@ const App = () => {
   
   return (
     <BrowserRouter>
-      <NavBar/>
 
       <Routes>
         <Route path="/" element={<Posts posts={ posts || [] } />} />
@@ -35,7 +34,7 @@ const App = () => {
         <Route path="*" element={<NoPage />} />
       </Routes>
 
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
     )
 };

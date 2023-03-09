@@ -1,7 +1,10 @@
 import mongoose,{Schema} from 'mongoose';
 
 const likeSchema = new mongoose.Schema({
-    userId: [String],
+    userId:{
+        type: Array<String>,
+        default: []
+    },
     createdAt: {
         type: Date,
         default: new Date(),

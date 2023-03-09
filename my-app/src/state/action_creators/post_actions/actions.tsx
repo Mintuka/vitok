@@ -28,6 +28,7 @@ export const createPost = (newPost: object) => {
                 type: ActionType.CREATE_POST,
                 payload: data
             })
+            window.location.href = '/'
         }else{
             dispatch({
                 type: ActionType.POST_ERROR,

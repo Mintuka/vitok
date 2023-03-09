@@ -5,7 +5,6 @@ export const isAuthorized = async(req: Request, res: Response, next: NextFunctio
     const { user } = req.body
     const { id } = req.params
     const comment:any = await Comment.findOne({_id: id}).lean().exec()
-    console.log( comment.creator.toString(), user._id.toString(),comment.creator.toString() === user._id.toString())
     if (comment.creator.toString() === user._id.toString()){
         return next()
     }else{

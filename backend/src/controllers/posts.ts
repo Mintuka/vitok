@@ -1,5 +1,6 @@
 import express,{Request, Response} from 'express';
 import mongoose from 'mongoose';
+import Like from '../models/Like';
 
 import PostMessage from '../models/postMessage';
 
@@ -28,12 +29,11 @@ export const getPost = async (req:Request, res:Response) => {
 export const createPost = async (req:Request, res:Response) => { 
 
     req.body.creator = req.body.user._id
+    const like:any = await Like.create({userId: []})
     const { title, message, selectedFile, creator, tags } = req.body;
-    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
+    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags, likeId: like._id })
     try {
-        console.log('create', newPostMessage)
         await newPostMessage.save();
-        console.log('b-post',newPostMessage)
 
         return res.status(201).json(newPostMessage );
     } catch (error) {
