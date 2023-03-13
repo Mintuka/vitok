@@ -27,8 +27,7 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
   const [change, setChange] = useState('invisible')
   const navigate = useNavigate()
-  console.log('like-users',likeId?.userId)
-  console.log('like-Count',likeCount)
+
   return (
         <div className="m-3 border">
             <div className="relative border" >
@@ -58,6 +57,10 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
                                 setLikeCount((likeCount:number) => likeCount-1)
                               }}/> : 
                            <AiOutlineLike onClick={() => { 
+                                if (!userId){
+                                  navigate('/signin')
+                                  return
+                                }
                                 likePosts(_id); 
                                 setLike(true); 
                                 setLikeCount((likeCount:number) => likeCount+1)}}/>

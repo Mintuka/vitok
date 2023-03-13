@@ -31,7 +31,6 @@ export const createUser = async (req:Request, res:Response) => {
     const newUser = new User({ email, password })
     try {
         await newUser.save();
-        console.log(newUser)
 
         res.status(201).json(newUser );
     } catch (error) {

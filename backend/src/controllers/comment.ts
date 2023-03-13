@@ -31,7 +31,6 @@ export const createComment = async (req:Request, res:Response) => {
     const newComment = new Comment({ creator, post, comment })
     try {
         await newComment.save();
-        console.log(newComment)
         res.status(201).json(newComment);
     } catch (error) {
         res.status(409).json({ message: error.message });

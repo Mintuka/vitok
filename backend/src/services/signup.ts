@@ -5,7 +5,6 @@ import { createToken } from './createToken'
 
 export const signup = async(req: Request, res: Response) => {
     try{
-        console.log('signup')
         const {email, password} = req.body
         const isExistingUser = await User.findOne({email})
         if (isExistingUser){

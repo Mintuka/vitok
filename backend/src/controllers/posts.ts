@@ -43,7 +43,6 @@ export const createPost = async (req:Request, res:Response) => {
 
 export const updatePost = async (req:Request, res:Response) => { 
     const { id } = req.params;
-    console.log('update',id)
     const { title, message, creator, selectedFile, tags } = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
@@ -56,7 +55,6 @@ export const updatePost = async (req:Request, res:Response) => {
 }
 
 export const deletePost = async (req:Request, res:Response) => { 
-    console.log('delete backend')
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
