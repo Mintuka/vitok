@@ -21,25 +21,14 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const [like, setLike] = useState(likeId && likeId?.userId ? likeId?.userId?.filter((id:any) => id === userId).length > 0: false)
 
   const dispatch = useDispatch();
-  const { deletePosts, likePosts } = bindActionCreators(postActions, dispatch)
+  const { likePosts } = bindActionCreators(postActions, dispatch)
 
   const [commentClass, setCommentClass] = useState('invisible')
-  const [BiDotsClass, setBiDotsClas] = useState('absolute right-1 m-1 pointer cursor-pointer')
-  const [change, setChange] = useState('invisible')
   const navigate = useNavigate()
 
   return (
         <div className="m-3 border">
-            <div className="relative border" >
-              <BiDotsVertical className={ BiDotsClass } size={20} onClick={() => handleBiDot(setChange,setBiDotsClas)}/>
-              <div className={change}>
-                <Link to={`/update/${_id}`} className='text-green-300 border'>update</Link>
-                <div onClick={() => deletePosts(_id)} className='text-red-400 border'>delete</div>
-              </div>
-              <h4 className='p-2'>{creator}</h4>
-              <h6 className='p-2'>2 hours ago</h6>
-              <img className="p-2" src="/people.png" alt="img" />
-            </div>
+            <img className="" src="/people.png" alt="img" />
             <div>
               <h5 className='p-2'>{tags}</h5>
               <h3 className='p-2'>{title}</h3>
