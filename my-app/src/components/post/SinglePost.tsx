@@ -23,7 +23,7 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
 
   return (
         <div className="m-3 border">
-            <img className="" src="/people.png" alt="img" />
+            <img className="" src="/download.png" alt="img" />
             <div>
               <h5 className='p-2'>{tags}</h5>
               <h3 className='p-2'>{title}</h3>
