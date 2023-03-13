@@ -22,14 +22,13 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const navigate = useNavigate()
 
   return (
-        <div className="m-3 border">
-            <img className="" src="/download.png" alt="img" />
-            <div>
-              <h5 className='p-2'>{tags}</h5>
-              <h3 className='p-2'>{title}</h3>
-              <p className='p-2'>{message}</p>
-              <div className='p-2 flex items-center justify-around'>
-                <div className='p-2 flex items-center'>
+        <div className="m-3 bg-white border rounded-lg overflow-hidden">
+            <img className="w-full" src="/minte.jpg" alt="img" />
+            <div className="px-8 py-6 relative">
+              <h3 className='font-semibold text-lg'>{title}</h3>
+              <p className='text-sm text-gray-600 break-words lowercase mt-1'>{message.substring(0,100)} <span className="font-bold">...</span></p>
+              <div className='flex items-center justify-between mt-2'>
+                {/* <div className='flex items-center'>
                   {
                     like ? <AiFillLike onClick={() => {
                                 if (!userId){
@@ -49,15 +48,20 @@ const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
                                 setLike(true); 
                                 setLikeCount((likeCount:number) => likeCount+1)}}/>
                   }
-                  <h6 className='mx-2'>{ likeCount }</h6>
+                  <h6 className='text-sm'>{ likeCount }</h6>
                 </div>
                 <BiCommentDetail onClick={() => setCommentClass('visible border')}/>
-                <FaShare/>
+                <FaShare/> */}
               </div>
-              <div className={commentClass}>
+              {/* <div className={commentClass}>
                 {
                     <Comments post={ _id } creator={ userId }/>
                 }
+              </div> */}
+              <div className="absolute top-7 right-8 font-thin text-sm">20 Jan 2023</div>
+              <div className="flex justify-start items-center">
+                <img className="rounded-full w-8 h-8 p-1 hover:w-10 hover:h-10 shadow-lg border" src="logo192.png" alt="logo" />
+                <p className="text-gray-500 text-sm m-1">Mintesnot Alemayehu</p>
               </div>
             </div>
         </div>
