@@ -2,18 +2,13 @@ import React,{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
 import { postActions } from "../../state"
-import { BiCommentDetail, BiDotsVertical } from 'react-icons/bi'
+import { BiCommentDetail } from 'react-icons/bi'
 import { FaShare } from 'react-icons/fa'
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Comments from "../comment/Comments";
 import { RootState } from "../../state/reducers";
 export interface postProps {_id: String,creator:String, tags:String[], title:String, selectedFile:String, message:String,likeId:any}
-
-const handleBiDot = (setChange:any, setBiDot:any) => {
-  setChange('visible absolute right-1 border cursor-pointer')
-  setBiDot('invisible m-0')
-}
 
 const Post = ({_id, creator, tags, title, message,likeId}:postProps) => {
   const { userId } = useSelector((state: RootState) => state.user)
