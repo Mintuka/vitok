@@ -27,7 +27,7 @@ export const userReducer = (state: UserType = { email:'', errorMessage:'', userI
                 errorMessage: action.payload.message
             }
         case ActionType.LOGIN_USER:
-            const val = {
+            return {
                 ...state,
                 email: action.payload.email,
                 firstName: action.payload.firstName,
@@ -35,8 +35,6 @@ export const userReducer = (state: UserType = { email:'', errorMessage:'', userI
                 userId: action.payload.decoded._id,
                 errorMessage: ''
             }
-            console.log('login-action',val)
-            return val
         case ActionType.LOG_OUT:
             return {
                 ...state,

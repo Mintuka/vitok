@@ -13,6 +13,8 @@ import { postActions } from "./state";
 import { ActionType } from "./state/action_types/types";
 import { RootState } from "./state/reducers";
 import jwt_decode from "jwt-decode";
+import ForgotPassword from "./components/user/ForgotPassword";
+import ResetPassword from "./components/user/ResetPassword";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ const App = () => {
         <Route path="/form" element={<Form />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-passwrod/:token/:id" element={<ResetPassword />} />
         <Route path="/update/:id" element={<UpdatePost />} />
         <Route path="/post/:id" element={<Details/>}/>
         <Route path="*" element={<NoPage />} />
