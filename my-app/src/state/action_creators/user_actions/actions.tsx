@@ -28,7 +28,6 @@ export const createUser = (newUser: object) => {
 export const logInUser = (user: object) => {
     return async(dispatch: Dispatch<Action>) => {
         const {data, status} = await logInUsers(user)
-        console.log('login-data',data)
         if (status === 200)
         {
             localStorage.setItem('user', JSON.stringify({email: data.email, token: data.token}))

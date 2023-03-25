@@ -2,22 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ActionType } from "../../state/action_types/types";
 import { RootState } from "../../state/reducers";
-import jwt_decode from "jwt-decode";
 
 const NavBar = () => {
     const dispatch = useDispatch()
     let { email } = useSelector((state: RootState) => state.user)
-    
-    if (!email && localStorage.getItem('user') !== null){
-        const userData = JSON.parse(localStorage.getItem('user') || '')
-        if (userData.email){
-            const decoded = jwt_decode(userData.token)
-            dispatch({
-                type: ActionType.LOGIN_USER,
-                payload: {...userData, decoded}
-            })
-        }
-    }
     
     const logout = () => {
         if (localStorage.getItem('user'))

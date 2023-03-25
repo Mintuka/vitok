@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import Footer from "./components/footer/footer";
 import Form from "./components/form/NewPost";
-import NavBar from "./components/navbar/NavBar";
 import NoPage from "./components/NoPage/NoPage";
 import Details from "./components/post/Details";
 import Posts from "./components/post/Posts";
@@ -12,15 +10,27 @@ import UpdatePost from "./components/post/UpdatePost";
 import SignIn from "./components/user/SignIn";
 import SignUp from "./components/user/SignUp";
 import { postActions } from "./state";
+import { ActionType } from "./state/action_types/types";
 import { RootState } from "./state/reducers";
+import jwt_decode from "jwt-decode";
 
 const App = () => {
-  const { posts, isLoading } = useSelector((state: RootState) => state.post)
   const dispatch = useDispatch();
+  const { posts, isLoading } = useSelector((state: RootState) => state.post)
+  const { email } = useSelector((state: RootState) => state.user)
+  if (!email && localStorage.getItem('user') !== null){
+    const userData = JSON.parse(localStorage.getItem('user') || '')
+    if (userData.email){
+        const decoded = jwt_decode(userData.token)
+        dispatch({
+            type: ActionType.LOGIN_USER,
+            payload: {...userData, decoded}
+        })
+    }
+  }
   const { getAllPosts } = bindActionCreators(postActions, dispatch)
-  console.log('posts-App',posts)
   useEffect(() => {
-    getAllPosts()
+    email && getAllPosts()
   },[])
   
   return (
