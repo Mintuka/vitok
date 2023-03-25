@@ -57,7 +57,6 @@ export const deleteComments = (commentId: string) => {
 export const updateComments = (commentId: string, update: Object) => {
     return async(dispatch: Dispatch<Action>) => {
         const { data, status } = await updateComment(commentId, update)
-        console.log('Update-Comment-Action', data)
         if (status === 200){
             dispatch({
                 type: ActionType.UPDATE_COMMENT,

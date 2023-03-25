@@ -12,7 +12,7 @@ export const signup = async(req: Request, res: Response) => {
         }
         const salt = await bcrypt.genSalt()
         const hash = await bcrypt.hash(password,salt)
-        const user: IUser = await User.create({email:email,password:hash})
+        const user: IUser = await User.create({...req.body,password:hash})
         const token = createToken(user._id)
         return res.status(200).json({email, token})
     }catch(err){

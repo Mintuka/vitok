@@ -7,7 +7,7 @@ type PropsType = {
 }
 const Baselayout = ({children}:PropsType) => {
   return (
-    <div className="max-h-screen min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
         <NavBar/>
         <div className="w-full flex">
             <SideBar/>

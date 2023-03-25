@@ -8,7 +8,7 @@ const router = express.Router();
 
 export const getPosts = async (req:Request, res:Response) => { 
     try {
-        const postMessages = await PostMessage.find().populate('likeId').lean().exec();
+        const postMessages = await PostMessage.find().populate('likeId creator').lean().exec();
         res.status(200).json(postMessages);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -19,7 +19,7 @@ export const getPost = async (req:Request, res:Response) => {
     const { id } = req.params;
 
     try {
-        const post = await PostMessage.findById(id).populate('likeId').lean().exec();
+        const post = await PostMessage.findById(id).populate('likeId creator').lean().exec();
         res.status(200).json(post);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -27,14 +27,12 @@ export const getPost = async (req:Request, res:Response) => {
 }
 
 export const createPost = async (req:Request, res:Response) => { 
-
     req.body.creator = req.body.user._id
     const like:any = await Like.create({userId: []})
     const { title, message, selectedFile, creator, tags } = req.body;
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags, likeId: like._id })
     try {
         await newPostMessage.save();
-
         return res.status(201).json(newPostMessage );
     } catch (error) {
         return res.status(409).json({ message: error.message });

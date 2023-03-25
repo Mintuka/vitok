@@ -1,13 +1,20 @@
 /*
+    first name and last name....
+    time post created, time comment created
     image upload not started yet
     error message
     send email to users who subscribe
     valid inputs and handling them
 
+    add endpoint for detail
+    add endpoint which fetch part of it.
+
     max-width for side scroll
     calc for sidebar max-height
     like must be after authentication
     use useRef instead of useState in some forms
+
+
 */
 
 const Footer = () => {

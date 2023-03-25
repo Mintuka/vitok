@@ -32,7 +32,7 @@ const NavBar = () => {
   return (
         <nav className="w-full flex items-center justify-between">
             <div className="flex items-center text-black mr-6">
-                <img src="tiktokLogo.png" className="w-20 h-15 " alt="logo" />
+                <img src="/tiktokLogo.png" className="w-20 h-15 " alt="logo" />
                 <span className="font-bold text-2xl">Vitok</span>
             </div>
 

@@ -19,7 +19,7 @@ const Posts = ({ posts }:{posts: Array<any>}) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full">
         {
-          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} creator={post.creator} tags={post.tags} title={post.title} message={post.message} likeId={post.likeId} selectedFile={post.selectedFile}></Post>)
+          posts.map((post: postProps, index:number) => <Post key={index} _id={post._id} creator={post.creator} title={post.title} message={post.message}></Post>)
         }
       </div>
       </Baselayout>

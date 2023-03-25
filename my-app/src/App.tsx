@@ -6,6 +6,7 @@ import Footer from "./components/footer/footer";
 import Form from "./components/form/NewPost";
 import NavBar from "./components/navbar/NavBar";
 import NoPage from "./components/NoPage/NoPage";
+import Details from "./components/post/Details";
 import Posts from "./components/post/Posts";
 import UpdatePost from "./components/post/UpdatePost";
 import SignIn from "./components/user/SignIn";
@@ -17,7 +18,7 @@ const App = () => {
   const { posts, isLoading } = useSelector((state: RootState) => state.post)
   const dispatch = useDispatch();
   const { getAllPosts } = bindActionCreators(postActions, dispatch)
-
+  console.log('posts-App',posts)
   useEffect(() => {
     getAllPosts()
   },[])
@@ -31,10 +32,10 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/update/:id" element={<UpdatePost />} />
+        <Route path="/post/:id" element={<Details/>}/>
         <Route path="*" element={<NoPage />} />
       </Routes>
 
-      {/* <Footer/> */}
     </BrowserRouter>
     )
 };

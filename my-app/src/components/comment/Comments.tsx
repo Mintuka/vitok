@@ -12,6 +12,7 @@ const Comments = ({ post, creator }:{post: String, creator: string}) => {
   const dispatch = useDispatch();
   const { createComments, getAllComments } = bindActionCreators(commentActions, dispatch)
   const [comment, setComment] = useState('')
+  const [commentClass, setCommentClass] = useState("bg-gray-100 text-gray-300 font-semibold p-2")
   
   const createComment = () => {
     if (comment){
@@ -19,17 +20,26 @@ const Comments = ({ post, creator }:{post: String, creator: string}) => {
     } 
   }
 
+  const handleChange = (e:any) => {
+    setComment(e.target.value)
+    if (e.target.value){
+      setCommentClass("bg-blue-400 text-white font-semibold p-2")
+    }else{
+      setCommentClass("bg-gray-100 text-gray-300 font-semibold p-2")
+    }
+  }
+  console.log('comments',comments)
   useEffect(() => {
     getAllComments()
   },[])
 
   return (
     <div>
-      <div>
-        <label htmlFor="comment">Comment</label>
+      <div className="mt-3">
+        <label className="text-gray-500" htmlFor="comment">{postComments.length === 1 ? '1 Comment': `${postComments.length} Comments`}</label>
         <div className="flex">
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="comment" placeholder="write comment" value={comment} onChange={(e) => setComment(e.target.value)}/>
-          <button className="border bg-blue-500 text-white p-2" onClick={ createComment }>comment</button>
+          <input className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-b-1 focus:border-black" type="text" name="comment" placeholder="write comment" value={comment} onChange={(e) => handleChange(e)}/>
+          <button className={commentClass} onClick={ createComment }>Comment</button>
         </div>
       </div>
       <div>

@@ -3,17 +3,21 @@ import { Action } from "../actions_interface/user_interface/interfaces"
 
 type UserType = {
     email: string,
+    firstName: string,
+    lastName: string,
     errorMessage: string,
     userId: string
 }
 
-export const userReducer = (state: UserType = { email:'', errorMessage:'', userId:'' }, action: Action) => {
+export const userReducer = (state: UserType = { email:'', errorMessage:'', userId:'', firstName:'', lastName:'' }, action: Action) => {
     
     switch(action.type){
         case ActionType.CREATE_USER:
             return {
                 ...state,
                 email: action.payload.email,
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
                 userId: action.payload.decoded._id,
                 errorMessage: ''
             }
@@ -23,16 +27,22 @@ export const userReducer = (state: UserType = { email:'', errorMessage:'', userI
                 errorMessage: action.payload.message
             }
         case ActionType.LOGIN_USER:
-            return {
+            const val = {
                 ...state,
                 email: action.payload.email,
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
                 userId: action.payload.decoded._id,
                 errorMessage: ''
             }
+            console.log('login-action',val)
+            return val
         case ActionType.LOG_OUT:
             return {
                 ...state,
                 email: action.payload,
+                firstName: action.payload,
+                lastName: action.payload,
                 userId: action.payload
             }
         default:

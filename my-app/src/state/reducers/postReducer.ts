@@ -1,9 +1,10 @@
 import { ActionType } from "../action_types/types"
 import { Action } from "../actions_interface/post_interface/interfaces"
 import { postProps } from "../../components/post/SinglePost"
+import { TypesDetail } from "../../types/details"
 
 type StateType = {
-    posts: Array<any>,
+    posts: Array<TypesDetail>,
     isLoading: boolean  
 }
 
