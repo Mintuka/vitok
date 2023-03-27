@@ -70,12 +70,12 @@ export const logInUsers = (user: Object) => axios.post(url+'/users/login', user)
                                 return {data: error.response.data, status: error.response.status}
                             })
 
-export const forgotPassword = (email: Object) => axios.get(url+'forgotPassword', email)
+export const forgotPassword = (email: Object) => axios.post(url+'/users/forgotPassword', email)
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })
 
-export const resetPassword = (user: Object) => axios.post(url+'/resetPassword', user)
+export const resetPassword = (user: Object) => axios.post(url+'/users/resetPassword', user)
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })

@@ -32,7 +32,7 @@ const App = () => {
   }
   const { getAllPosts } = bindActionCreators(postActions, dispatch)
   useEffect(() => {
-    email && getAllPosts()
+    getAllPosts()
   },[])
   
   return (
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-passwrod/:token/:id" element={<ResetPassword />} />
+        <Route path="/reset-password/:token/:id" element={<ResetPassword />} />
         <Route path="/update/:id" element={<UpdatePost />} />
         <Route path="/post/:id" element={<Details/>}/>
         <Route path="*" element={<NoPage />} />

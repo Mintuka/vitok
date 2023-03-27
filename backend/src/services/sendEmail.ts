@@ -1,16 +1,17 @@
 import nodemailer from 'nodemailer'
 
 export const sendEmail = (reciever: string,  resetLink: string) => {
+    
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: 'henokkassa601@gmail.com',
-          pass: 'kassa601@!'
+          pass: 'vnrllkzzewuhmfio'
         }
       });
       
       var mailOptions = {
-        from: 'youremail@gmail.com',
+        from: 'henokkassa601@gmail.com',
         to: reciever,
         subject: 'Reset Password',
         text: resetLink
@@ -19,12 +20,11 @@ export const sendEmail = (reciever: string,  resetLink: string) => {
       var isSent = false
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-          console.log(error);
+          console.log(error); //throw error
         } else {
           console.log('Email sent: ' + info.response);
           isSent = true
         }
       });
-
       return isSent
 }

@@ -8,7 +8,8 @@ const ForgotPassword = (props: Props) => {
     const [email, setEmail] = useState('')
     const [isSent, setIsSent] = useState(false)
     const handleSubmit = async() => {
-        const { status} = await forgotPassword(email)
+        const { status } = await forgotPassword({email})
+        console.log('status', status)
         setIsSent(status === 200)
     }
 
@@ -31,7 +32,7 @@ const ForgotPassword = (props: Props) => {
                         <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#" onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-                                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="mintua@gmail.com" required value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="mintua@gmail.com" required value={email} onChange={(e) => setEmail(`${e.target.value}`)}/>
                             </div>
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
