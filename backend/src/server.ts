@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
 app.use('/users', userRoutes)
-app.use('/posts', postRoutes);
+app.use('/posts', postRoutes)
 app.use('/like', likeRoutes)
 app.use('/comments', commentRoutes)
 const CONNECTION_URL = 'mongodb://localhost:27017/react';

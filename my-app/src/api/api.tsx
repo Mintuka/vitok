@@ -75,7 +75,7 @@ export const forgotPassword = (email: Object) => axios.post(url+'/users/forgotPa
                                 return {data: error.response.data, status: error.response.status}
                             })
 
-export const resetPassword = (user: Object) => axios.post(url+'/users/resetPassword', user)
+export const resetPassword = (user: Object) => authAxios.post(url+'/users/resetPassword', user)
                             .catch(error => {
                                 return {data: error.response.data, status: error.response.status}
                             })

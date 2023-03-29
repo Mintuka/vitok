@@ -9,10 +9,8 @@ const ForgotPassword = (props: Props) => {
     const [isSent, setIsSent] = useState(false)
     const handleSubmit = async() => {
         const { status } = await forgotPassword({email})
-        console.log('status', status)
         setIsSent(status === 200)
     }
-
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             {
